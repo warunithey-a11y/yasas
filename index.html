@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLR Reseller | Powering Your Server Success</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Rajdhani', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            purple: '#7c3aed',
+                            blue: '#2563eb',
+                            neon: '#00f3ff'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            'from': { boxShadow: '0 0 10px #7c3aed, 0 0 20px #2563eb' },
+                            'to': { boxShadow: '0 0 20px #00f3ff, 0 0 30px #2563eb' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 25%), 
+                radial-gradient(circle at 85% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 25%);
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(124, 58, 237, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.3);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #7c3aed, #00f3ff);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-text-gradient {
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+        }
+
+        /* Loader */
+        .loader {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border-top: 3px solid #7c3aed;
+            width: 24px;
+            height: 24px;
+            -webkit-animation: spin 1s linear infinite; /* Safari */
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="router.navigate('home')">
+                    <div class="w-10 h-10 rounded bg-gradient-to-br from-brand-purple to-brand-blue flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-purple/50">
+                        SLR
+                    </div>
+                    <span class="font-display font-bold text-2xl tracking-wider text-white">RESELLER</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <button onclick="router.navigate('home')" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-lg font-medium transition-colors">Home</button>
+                        <button onclick="router.navigate('shop')" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-lg font-medium transition-colors">Shop</button>
+                        <button onclick="router.navigate('services')" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-lg font-medium transition-colors">Services</button>
+                        <button onclick="router.navigate('about')" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-lg font-medium transition-colors">About</button>
+                        <button onclick="router.navigate('contact')" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-lg font-medium transition-colors">Contact</button>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center gap-4">
+                    <button onclick="cart.toggle()" class="relative p-2 text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute top-0 right-0 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center transform scale-0 transition-transform duration-200">0</span>
+                    </button>
+                    <div id="auth-buttons">
+                        <button onclick="auth.toggleModal()" class="bg-gradient-to-r from-brand-purple to-brand-blue hover:from-brand-blue hover:to-brand-purple text-white px-6 py-2 rounded-full font-bold transition-all shadow-lg shadow-brand-purple/30">
+                            Login
+                        </button>
+                    </div>
+                    <div id="user-profile" class="hidden flex items-center gap-3">
+                        <span class="text-gray-300 font-medium" id="username-display"></span>
+                        <button onclick="auth.logout()" class="text-sm text-red-400 hover:text-red-300">Logout</button>
+                        <button onclick="router.navigate('admin')" id="admin-btn" class="hidden bg-white/10 p-2 rounded hover:bg-white/20"><i class="fas fa-cog"></i></button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden glass-panel border-t border-white/5" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onclick="router.navigate('home')" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">Home</button>
+                <button onclick="router.navigate('shop')" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">Shop</button>
+                <button onclick="router.navigate('services')" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">Services</button>
+                <button onclick="router.navigate('about')" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">About</button>
+                <button onclick="router.navigate('contact')" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app" class="flex-grow pt-20">
+        <!-- Content injected via JS -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-panel border-t border-white/5 mt-auto">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded bg-gradient-to-br from-brand-purple to-brand-blue flex items-center justify-center text-white font-bold text-sm">SLR</div>
+                        <span class="font-display font-bold text-xl text-white">RESELLER</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Sri Lanka's premier destination for FiveM scripts, Discord bots, and game server assets.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><button onclick="router.navigate('shop')" class="hover:text-brand-neon">Shop</button></li>
+                        <li><button onclick="router.navigate('services')" class="hover:text-brand-neon">Services</button></li>
+                        <li><button onclick="router.navigate('about')" class="hover:text-brand-neon">About Us</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-neon">FAQ</a></li>
+                        <li><button onclick="router.navigate('contact')" class="hover:text-brand-neon">Contact</button></li>
+                        <li><a href="#" class="hover:text-brand-neon">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-brand-neon text-xl"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-brand-neon text-xl"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-brand-neon text-xl"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-white/5 pt-8 text-center text-gray-500 text-sm">
+                &copy; 2023 SLR Reseller. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-[60] pointer-events-none">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300" id="cart-overlay" onclick="cart.toggle()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-[#0f172a] border-l border-white/10 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col pointer-events-auto" id="cart-panel">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center">
+                <h2 class="text-2xl font-display font-bold text-white">Your Cart</h2>
+                <button onclick="cart.toggle()" class="text-gray-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Cart items injected here -->
+                <div class="text-center text-gray-500 mt-10">Your cart is empty</div>
+            </div>
+            <div class="p-6 border-t border-white/10 bg-[#0b1120]">
+                <div class="flex justify-between mb-4 text-xl font-bold text-white">
+                    <span>Total:</span>
+                    <span id="cart-total">LKR 0.00</span>
+                </div>
+                <button onclick="cart.checkout()" class="w-full bg-gradient-to-r from-brand-purple to-brand-blue hover:from-brand-blue hover:to-brand-purple text-white py-3 rounded-lg font-bold transition-all shadow-lg shadow-brand-purple/30">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="auth.toggleModal()"></div>
+        <div class="bg-[#1e293b] rounded-2xl p-8 max-w-md w-full relative z-10 border border-white/10 shadow-2xl transform transition-all scale-95 opacity-0" id="auth-panel">
+            <button onclick="auth.toggleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+            
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-display font-bold text-white mb-2">Welcome Back</h2>
+                <p class="text-gray-400">Access your dashboard and orders</p>
+            </div>
+
+            <form onsubmit="auth.login(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                    <input type="email" id="login-email" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors" placeholder="you@example.com" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+                    <input type="password" id="login-pass" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-brand-purple to-brand-blue text-white py-3 rounded-lg font-bold hover:opacity-90 transition-opacity">
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center text-sm text-gray-500">
+                Don't have an account? <button onclick="auth.register()" class="text-brand-neon hover:underline">Register</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 z-[80] bg-[#1e293b] border-l-4 border-brand-purple text-white px-6 py-4 rounded shadow-2xl flex items-center gap-3">
+        <i class="fas fa-check-circle text-brand-neon"></i>
+        <span id="toast-message">Operation successful</span>
+    </div>
+
+    <script>
+        // --- DATA STORE ---
+        const db = {
+            products: [
+                {
+                    id: 1,
+                    name: "ESX Legacy Full Pack",
+                    category: "FiveM",
+                    price: 4500,
+                    image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800&q=80",
+                    description: "Complete ESX framework setup with optimized SQL database and 50+ pre-configured jobs."
+                },
+                {
+                    id: 2,
+                    name: "QBCore Server Base",
+                    category: "FiveM",
+                    price: 5500,
+                    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+                    description: "The most popular framework for FiveM. Includes inventory, banking, and housing systems."
+                },
+                {
+                    id: 3,
+                    name: "Discord Bot: Moderator Pro",
+                    category: "Discord",
+                    price: 2500,
+                    image: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?auto=format&fit=crop&w=800&q=80",
+                    description: "Advanced auto-moderation, ticketing system, and leveling features for your community."
+                },
+                {
+                    id: 4,
+                    name: "Custom MLO: Luxury Villa",
+                    category: "Assets",
+                    price: 8000,
+                    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+                    description: "High-poly interior mapping for FiveM. Optimized for low latency streaming."
+                },
+                {
+                    id: 5,
+                    name: "VPS Hosting (4GB RAM)",
+                    category: "Hosting",
+                    price: 1200,
+                    image: "https://images.unsplash.com/photo-1558494949-ef526b004297?auto=format&fit=crop&w=800&q=80",
+                    description: "Reliable VPS based in Singapore, perfect for small FiveM servers or Discord bots."
+                },
+                {
+                    id: 6,
+                    name: "NoPixel Inspired HUD",
+                    category: "FiveM",
+                    price: 1500,
+                    image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800&q=80",
+                    description: "Clean, minimalistic HUD with speedometer, stress, and hunger/thirst indicators."
+                }
+            ],
+            user: null, // { name: "Admin", role: "admin" }
+            cart: []
+        };
+
+        // --- UTILS ---
+        const formatCurrency = (amount) => {
+            return new Intl.NumberFormat('en-LK', { style: 'currency', currency: 'LKR' }).format(amount);
+        };
+
+        const showToast = (msg) => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        };
+
+        // --- COMPONENTS ---
+
+        const Components = {
+            Hero: () => `
+                <div class="relative overflow-hidden min-h-[90vh] flex items-center">
+                    <!-- Background Elements -->
+                    <div class="absolute top-20 left-10 w-72 h-72 bg-brand-purple/20 rounded-full blur-[100px]"></div>
+                    <div class="absolute bottom-20 right-10 w-96 h-96 bg-brand-blue/20 rounded-full blur-[100px]"></div>
+                    
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div class="space-y-8 animate-fade-in-up">
+                                <div class="inline-block px-4 py-1 rounded-full border border-brand-purple/50 bg-brand-purple/10 text-brand-neon text-sm font-bold tracking-wide mb-4">
+                                    #1 DIGITAL RESELLER IN SRI LANKA
+                                </div>
+                                <h1 class="text-5xl md:text-7xl font-display font-black leading-tight hero-text-gradient">
+                                    Powering Your <br>
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-blue">Server Success</span>
+                                </h1>
+                                <p class="text-xl text-gray-400 max-w-lg leading-relaxed">
+                                    Premium FiveM scripts, Discord bots, and game assets. Instant delivery, 24/7 support, and unbeatable prices.
+                                </p>
+                                <div class="flex flex-wrap gap-4">
+                                    <button onclick="router.navigate('shop')" class="bg-gradient-to-r from-brand-purple to-brand-blue text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all transform hover:-translate-y-1">
+                                        Browse Shop <i class="fas fa-arrow-right ml-2"></i>
+                                    </button>
+                                    <button onclick="router.navigate('services')" class="glass-panel text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all border border-white/10">
+                                        Our Services
+                                    </button>
+                                </div>
+                                
+                                <div class="flex items-center gap-8 pt-8 border-t border-white/10">
+                                    <div>
+                                        <div class="text-3xl font-bold text-white">500+</div>
+                                        <div class="text-sm text-gray-500">Products Sold</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-3xl font-bold text-white">24/7</div>
+                                        <div class="text-sm text-gray-500">Support</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-3xl font-bold text-white">100%</div>
+                                        <div class="text-sm text-gray-500">Secure</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative hidden lg:block animate-float">
+                                <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
+                                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1000&q=80" alt="Gaming Setup" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent opacity-60"></div>
+                                    <div class="absolute bottom-6 left-6 right-6">
+                                        <div class="glass-panel p-4 rounded-xl border border-white/10">
+                                            <div class="flex items-center justify-between mb-2">
+                                                <span class="text-sm text-gray-300">Featured Product</span>
+                                                <span class="text-brand-neon text-xs font-bold">NEW</span>
+                                            </div>
+                                            <div class="font-bold text-white">Ultimate RP Server Bundle</div>
+                                            <div class="text-brand-purple font-display">LKR 15,000</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Decorative elements behind image -->
+                                <div class="absolute -top-10 -right-10 w-full h-full border-2 border-brand-purple/30 rounded-2xl -z-10"></div>
+                                <div class="absolute -bottom-10 -left-10 w-full h-full border-2 border-brand-blue/30 rounded-2xl -z-10"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            FeaturedProducts: () => {
+                const featured = db.products.slice(0, 3);
+                return `
+                    <section class="py-24 bg-[#0b1120]">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="text-center mb-16">
+                                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Featured Products</h2>
+                                <div class="h-1 w-20 bg-gradient-to-r from-brand-purple to-brand-blue mx-auto rounded-full"></div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                ${featured.map(p => Components.ProductCard(p)).join('')}
+                            </div>
+                            <div class="text-center mt-12">
+                                <button onclick="router.navigate('shop')" class="text-brand-neon hover:text-white font-bold transition-colors border-b border-brand-neon hover:border-white pb-1">View All Products</button>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            },
+
+            ProductCard: (product) => `
+                <div class="glass-card rounded-xl overflow-hidden group flex flex-col h-full">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/10">
+                            ${product.category}
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-neon transition-colors">${product.name}</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2 flex-1">${product.description}</p>
+                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                            <span class="text-xl font-display font-bold text-white">${formatCurrency(product.price)}</span>
+                            <button onclick="cart.add(${product.id})" class="bg-white/5 hover:bg-brand-purple text-white p-2 rounded-lg transition-all border border-white/10 hover:border-brand-purple">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            WhyChooseUs: () => `
+                <section class="py-24 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-[#0b1120] to-[#050505]"></div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                            <div>
+                                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-6">Why Choose SLR Reseller?</h2>
+                                <p class="text-gray-400 mb-8 text-lg">We don't just sell scripts; we provide the foundation for your gaming community's success. Trusted by over 100+ server owners in Sri Lanka.</p>
+                                
+                                <div class="space-y-6">
+                                    <div class="flex gap-4">
+                                        <div class="w-12 h-12 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple text-xl shrink-0">
+                                            <i class="fas fa-bolt"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold text-lg">Instant Delivery</h4>
+                                            <p class="text-gray-500 text-sm">Automated system delivers your files immediately after payment confirmation.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <div class="w-12 h-12 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue text-xl shrink-0">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold text-lg">Secure & Safe</h4>
+                                            <p class="text-gray-500 text-sm">All scripts are scanned for malware and backdoors before listing.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <div class="w-12 h-12 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-500 text-xl shrink-0">
+                                            <i class="fas fa-headset"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold text-lg">Local Support</h4>
+                                            <p class="text-gray-500 text-sm">Sinhala & English support available via Discord and WhatsApp.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-4 mt-8">
+                                    <div class="glass-card p-6 rounded-xl text-center">
+                                        <i class="fas fa-users text-3xl text-brand-neon mb-3"></i>
+                                        <div class="text-2xl font-bold text-white">150+</div>
+                                        <div class="text-xs text-gray-500 uppercase tracking-wider">Clients</div>
+                                    </div>
+                                    <div class="glass-card p-6 rounded-xl text-center">
+                                        <i class="fas fa-star text-3xl text-yellow-400 mb-3"></i>
+                                        <div class="text-2xl font-bold text-white">4.9/5</div>
+                                        <div class="text-xs text-gray-500 uppercase tracking-wider">Rating</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="glass-card p-6 rounded-xl text-center">
+                                        <i class="fas fa-box-open text-3xl text-brand-purple mb-3"></i>
+                                        <div class="text-2xl font-bold text-white">50+</div>
+                                        <div class="text-xs text-gray-500 uppercase tracking-wider">Products</div>
+                                    </div>
+                                    <div class="glass-card p-6 rounded-xl text-center">
+                                        <i class="fas fa-clock text-3xl text-brand-blue mb-3"></i>
+                                        <div class="text-2xl font-bold text-white">2y+</div>
+                                        <div class="text-xs text-gray-500 uppercase tracking-wider">Experience</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `,
+
+            ShopPage: () => {
+                const categories = ["All", ...new Set(db.products.map(p => p.category))];
+                return `
+                    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                        <div class="text-center mb-12">
+                            <h1 class="text-4xl font-display font-bold text-white mb-4">Digital Marketplace</h1>
+                            <p class="text-gray-400">Browse our collection of premium digital assets</p>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="flex flex-wrap justify-center gap-4 mb-12">
+                            ${categories.map(cat => `
+                                <button onclick="shop.filter('${cat}')" class="filter-btn px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:bg-brand-purple hover:text-white hover:border-brand-purple transition-all ${cat === 'All' ? 'bg-brand-purple text-white border-brand-purple' : ''}" data-category="${cat}">
+                                    ${cat}
+                                </button>
+                            `).join('')}
+                        </div>
+
+                        <!-- Grid -->
+                        <div id="shop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            ${db.products.map(p => Components.ProductCard(p)).join('')}
+                        </div>
+                    </div>
+                `;
+            },
+
+            ServicesPage: () => `
+                <div class="min-h-screen py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h1 class="text-4xl font-display font-bold text-white mb-4">Our Services</h1>
+                        <p class="text-gray-400 max-w-2xl mx-auto">We offer professional setup and development services to get your server running smoothly.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Service 1 -->
+                        <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <i class="fas fa-server text-9xl text-brand-purple"></i>
+                            </div>
+                            <div class="w-14 h-14 bg-brand-purple/20 rounded-xl flex items-center justify-center text-brand-purple text-2xl mb-6">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">FiveM Server Setup</h3>
+                            <p class="text-gray-400 mb-6">Complete server installation, database configuration, essential resources setup, and optimization.</p>
+                            <ul class="space-y-2 mb-8 text-sm text-gray-300">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> TXAdmin Setup</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> SQL Database Config</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> Server.cfg Optimization</li>
+                            </ul>
+                            <div class="text-2xl font-bold text-white mb-4">LKR 3,500</div>
+                            <button onclick="router.navigate('contact')" class="w-full py-3 rounded-lg border border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white transition-all font-bold">Order Now</button>
+                        </div>
+
+                        <!-- Service 2 -->
+                        <div class="glass-card p-8 rounded-2xl relative overflow-hidden group border-brand-blue/30 shadow-[0_0_30px_rgba(37,99,235,0.1)]">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <i class="fab fa-discord text-9xl text-brand-blue"></i>
+                            </div>
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-purple to-brand-blue"></div>
+                            <div class="w-14 h-14 bg-brand-blue/20 rounded-xl flex items-center justify-center text-brand-blue text-2xl mb-6">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Discord Setup</h3>
+                            <p class="text-gray-400 mb-6">Professional Discord server architecture with bots, roles, channels, and verification systems.</p>
+                            <ul class="space-y-2 mb-8 text-sm text-gray-300">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> Channel Structure</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> Bot Configuration</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> Reaction Roles</li>
+                            </ul>
+                            <div class="text-2xl font-bold text-white mb-4">LKR 2,000</div>
+                            <button onclick="router.navigate('contact')" class="w-full py-3 rounded-lg bg-gradient-to-r from-brand-purple to-brand-blue text-white font-bold hover:shadow-lg hover:shadow-brand-blue/50 transition-all">Order Now</button>
+                        </div>
+
+                        <!-- Service 3 -->
+                        <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <i class="fas fa-code text-9xl text-pink-500"></i>
+                            </div>
+                            <div class="w-14 h-14 bg-pink-500/20 rounded-xl flex items-center justify-center text-pink-500 text-2xl mb-6">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Custom Development</h3>
+                            <p class="text-gray-400 mb-6">Bespoke Lua scripts for FiveM or custom Discord bots tailored to your specific needs.</p>
+                            <ul class="space-y-2 mb-8 text-sm text-gray-300">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> Unique UI Design</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> Database Integration</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-neon"></i> Bug Fixes</li>
+                            </ul>
+                            <div class="text-2xl font-bold text-white mb-4">LKR 5,000+</div>
+                            <button onclick="router.navigate('contact')" class="w-full py-3 rounded-lg border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition-all font-bold">Contact Us</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            AboutPage: () => `
+                <div class="min-h-screen py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                    <div class="glass-card p-8 md:p-16 rounded-3xl text-center mb-16">
+                        <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">About SLR Reseller</h1>
+                        <p class="text-xl text-gray-300 leading-relaxed">
+                            Founded in 2021, SLR Reseller started as a small project to help local FiveM communities access high-quality assets without international payment barriers. Today, we are Sri Lanka's leading digital marketplace for gaming assets.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="glass-card p-8 rounded-2xl">
+                            <div class="w-12 h-12 bg-brand-purple/20 rounded-full flex items-center justify-center text-brand-purple text-xl mb-4">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Our Mission</h3>
+                            <p class="text-gray-400">To democratize access to high-quality game server infrastructure in South Asia, empowering creators to build immersive worlds without technical or financial barriers.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl">
+                            <div class="w-12 h-12 bg-brand-blue/20 rounded-full flex items-center justify-center text-brand-blue text-xl mb-4">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Our Vision</h3>
+                            <p class="text-gray-400">To become the one-stop ecosystem for virtual world development, bridging the gap between global technology and local talent in Sri Lanka.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            ContactPage: () => `
+                <div class="min-h-screen py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                        <div>
+                            <h1 class="text-4xl font-display font-bold text-white mb-6">Get in Touch</h1>
+                            <p class="text-gray-400 mb-8">Have a question or need a custom quote? Reach out to us directly.</p>
+                            
+                            <div class="space-y-6">
+                                <a href="#" class="flex items-center gap-4 p-4 glass-card rounded-xl hover:bg-white/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-[#5865F2]/20 rounded-lg flex items-center justify-center text-[#5865F2] text-xl group-hover:scale-110 transition-transform">
+                                        <i class="fab fa-discord"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-white font-bold">Join our Discord</div>
+                                        <div class="text-sm text-gray-500">discord.gg/slrreseller</div>
+                                    </div>
+                                </a>
+                                
+                                <a href="#" class="flex items-center gap-4 p-4 glass-card rounded-xl hover:bg-white/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-[#25D366]/20 rounded-lg flex items-center justify-center text-[#25D366] text-xl group-hover:scale-110 transition-transform">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-white font-bold">WhatsApp Us</div>
+                                        <div class="text-sm text-gray-500">+94 77 123 4567</div>
+                                    </div>
+                                </a>
+
+                                <a href="#" class="flex items-center gap-4 p-4 glass-card rounded-xl hover:bg-white/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center text-red-500 text-xl group-hover:scale-110 transition-transform">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-white font-bold">Email Support</div>
+                                        <div class="text-sm text-gray-500">support@slrreseller.lk</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-2xl">
+                            <form onsubmit="event.preventDefault(); showToast('Message sent successfully!'); this.reset();" class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                                    <input type="text" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                    <input type="email" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                    <textarea rows="4" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors" required></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-gradient-to-r from-brand-purple to-brand-blue text-white py-3 rounded-lg font-bold hover:opacity-90 transition-opacity">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            AdminPage: () => {
+                if (!db.user || db.user.role !== 'admin') {
+                    return `
+                        <div class="min-h-screen flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-lock text-6xl text-gray-600 mb-4"></i>
+                                <h2 class="text-2xl text-white font-bold">Access Denied</h2>
+                                <p class="text-gray-400 mb-6">Please login as admin to view this page.</p>
+                                <button onclick="auth.toggleModal()" class="bg-brand-purple text-white px-6 py-2 rounded-lg">Login</button>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                        <div class="flex justify-between items-center mb-8">
+                            <h1 class="text-3xl font-display font-bold text-white">Admin Dashboard</h1>
+                            <button onclick="admin.showAddModal()" class="bg-brand-purple hover:bg-brand-purple/80 text-white px-4 py-2 rounded-lg font-bold">
+                                <i class="fas fa-plus mr-2"></i> Add Product
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-xl overflow-hidden">
+                            <table class="w-full text-left text-gray-400">
+                                <thead class="bg-black/20 text-gray-200 uppercase text-sm">
+                                    <tr>
+                                        <th class="px-6 py-4">Product</th>
+                                        <th class="px-6 py-4">Category</th>
+                                        <th class="px-6 py-4">Price</th>
+                                        <th class="px-6 py-4 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/5">
+                                    ${db.products.map(p => `
+                                        <tr class="hover:bg-white/5 transition-colors">
+                                            <td class="px-6 py-4 flex items-center gap-3">
+                                                <img src="${p.image}" class="w-10 h-10 rounded object-cover">
+                                                <span class="text-white font-medium">${p.name}</span>
+                                            </td>
+                                            <td class="px-6 py-4">${p.category}</td>
+                                            <td class="px-6 py-4">${formatCurrency(p.price)}</td>
+                                            <td class="px-6 py-4 text-right">
+                                                <button onclick="admin.deleteProduct(${p.id})" class="text-red-400 hover:text-red-300 mr-3"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Add Product Modal -->
+                    <div id="add-product-modal" class="fixed inset-0 z-[80] hidden flex items-center justify-center px-4">
+                        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="admin.hideAddModal()"></div>
+                        <div class="bg-[#1e293b] rounded-2xl p-8 max-w-lg w-full relative z-10 border border-white/10">
+                            <h3 class="text-2xl font-bold text-white mb-6">Add New Product</h3>
+                            <form onsubmit="admin.addProduct(event)" class="space-y-4">
+                                <input type="text" id="new-prod-name" placeholder="Product Name" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2 text-white" required>
+                                <select id="new-prod-cat" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2 text-white">
+                                    <option>FiveM</option>
+                                    <option>Discord</option>
+                                    <option>Assets</option>
+                                    <option>Hosting</option>
+                                </select>
+                                <input type="number" id="new-prod-price" placeholder="Price (LKR)" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2 text-white" required>
+                                <input type="url" id="new-prod-img" placeholder="Image URL" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2 text-white" required>
+                                <textarea id="new-prod-desc" placeholder="Description" class="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2 text-white" required></textarea>
+                                <div class="flex gap-4 mt-6">
+                                    <button type="button" onclick="admin.hideAddModal()" class="flex-1 py-2 rounded-lg border border-gray-600 text-gray-300 hover:bg-white/5">Cancel</button>
+                                    <button type="submit" class="flex-1 py-2 rounded-lg bg-brand-purple text-white font-bold hover:bg-brand-purple/80">Add Product</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        // --- LOGIC CONTROLLERS ---
+
+        const router = {
+            currentPage: 'home',
+            navigate: (page) => {
+                router.currentPage = page;
+                window.scrollTo(0, 0);
+                
+                // Update Nav Active State (Visual only for this demo)
+                document.querySelectorAll('.nav-link').forEach(el => {
+                    el.classList.remove('text-white');
+                    el.classList.add('text-gray-300');
+                });
+                
+                const app = document.getElementById('app');
+                
+                switch(page) {
+                    case 'home':
+                        app.innerHTML = Components.Hero() + Components.FeaturedProducts() + Components.WhyChooseUs();
+                        break;
+                    case 'shop':
+                        app.innerHTML = Components.ShopPage();
+                        break;
+                    case 'services':
+                        app.innerHTML = Components.ServicesPage();
+                        break;
+                    case 'about':
+                        app.innerHTML = Components.AboutPage();
+                        break;
+                    case 'contact':
+                        app.innerHTML = Components.ContactPage();
+                        break;
+                    case 'admin':
+                        app.innerHTML = Components.AdminPage();
+                        break;
+                    default:
+                        app.innerHTML = Components.Hero();
+                }
+            }
+        };
+
+        const cart = {
+            toggle: () => {
+                const drawer = document.getElementById('cart-drawer');
+                const panel = document.getElementById('cart-panel');
+                const overlay = document.getElementById('cart-overlay');
+                
+                if (drawer.classList.contains('pointer-events-none')) {
+                    // Open
+                    drawer.classList.remove('pointer-events-none');
+                    overlay.classList.remove('opacity-0');
+                    panel.classList.remove('translate-x-full');
+                    cart.render();
+                } else {
+                    // Close
+                    drawer.classList.add('pointer-events-none');
+                    overlay.classList.add('opacity-0');
+                    panel.classList.add('translate-x-full');
+                }
+            },
+            add: (id) => {
+                const product = db.products.find(p => p.id === id);
+                db.cart.push(product);
+                cart.updateBadge();
+                showToast(`${product.name} added to cart`);
+            },
+            remove: (index) => {
+                db.cart.splice(index, 1);
+                cart.render();
+                cart.updateBadge();
+            },
+            updateBadge: () => {
+                const badge = document.getElementById('cart-count');
+                badge.innerText = db.cart.length;
+                if (db.cart.length > 0) {
+                    badge.classList.remove('scale-0');
+                } else {
+                    badge.classList.add('scale-0');
+                }
+            },
+            render: () => {
+                const container = document.getElementById('cart-items');
+                const totalEl = document.getElementById('cart-total');
+                
+                if (db.cart.length === 0) {
+                    container.innerHTML = '<div class="text-center text-gray-500 mt-10 flex flex-col items-center"><i class="fas fa-shopping-basket text-4xl mb-2 opacity-50"></i>Your cart is empty</div>';
+                    totalEl.innerText = formatCurrency(0);
+                    return;
+                }
+
+                let total = 0;
+                container.innerHTML = db.cart.map((item, index) => {
+                    total += item.price;
+                    return `
+                        <div class="flex gap-4 bg-white/5 p-3 rounded-lg border border-white/5">
+                            <img src="${item.image}" class="w-16 h-16 rounded object-cover">
+                            <div class="flex-1">
+                                <h4 class="text-white font-bold text-sm">${item.name}</h4>
+                                <div class="text-brand-neon text-sm">${formatCurrency(item.price)}</div>
+                            </div>
+                            <button onclick="cart.remove(${index})" class="text-gray-500 hover:text-red-400 self-center px-2">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+                
+                totalEl.innerText = formatCurrency(total);
+            },
+            checkout: () => {
+                if (db.cart.length === 0) return;
+                if (!db.user) {
+                    cart.toggle();
+                    auth.toggleModal();
+                    showToast("Please login to checkout");
+                    return;
+                }
+                showToast("Processing payment...");
+                setTimeout(() => {
+                    db.cart = [];
+                    cart.render();
+                    cart.updateBadge();
+                    cart.toggle();
+                    showToast("Order placed successfully!");
+                }, 1500);
+            }
+        };
+
+        const auth = {
+            toggleModal: () => {
+                const modal = document.getElementById('auth-modal');
+                const panel = document.getElementById('auth-panel');
+                
+                if (modal.classList.contains('hidden')) {
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                        panel.classList.remove('scale-95', 'opacity-0');
+                        panel.classList.add('scale-100', 'opacity-100');
+                    }, 10);
+                } else {
+                    panel.classList.remove('scale-100', 'opacity-100');
+                    panel.classList.add('scale-95', 'opacity-0');
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                    }, 300);
+                }
+            },
+            login: (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                
+                // Simulate Login
+                db.user = {
+                    name: email.split('@')[0],
+                    email: email,
+                    role: email.includes('admin') ? 'admin' : 'user'
+                };
+                
+                auth.toggleModal();
+                auth.updateUI();
+                showToast(`Welcome back, ${db.user.name}!`);
+            },
+            register: () => {
+                showToast("Registration simulated! Please use any email to login.");
+            },
+            logout: () => {
+                db.user = null;
+                auth.updateUI();
+                router.navigate('home');
+                showToast("Logged out successfully");
+            },
+            updateUI: () => {
+                const authButtons = document.getElementById('auth-buttons');
+                const userProfile = document.getElementById('user-profile');
+                const usernameDisplay = document.getElementById('username-display');
+                const adminBtn = document.getElementById('admin-btn');
+
+                if (db.user) {
+                    authButtons.classList.add('hidden');
+                    userProfile.classList.remove('hidden');
+                    usernameDisplay.innerText = db.user.name;
+                    
+                    if (db.user.role === 'admin') {
+                        adminBtn.classList.remove('hidden');
+                    } else {
+                        adminBtn.classList.add('hidden');
+                    }
+                } else {
+                    authButtons.classList.remove('hidden');
+                    userProfile.classList.add('hidden');
+                }
+            }
+        };
+
+        const shop = {
+            filter: (category) => {
+                // Update buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    if (btn.dataset.category === category) {
+                        btn.classList.add('bg-brand-purple', 'text-white', 'border-brand-purple');
+                        btn.classList.remove('text-gray-300');
+                    } else {
+                        btn.classList.remove('bg-brand-purple', 'text-white', 'border-brand-purple');
+                        btn.classList.add('text-gray-300');
+                    }
+                });
+
+                // Filter grid
+                const grid = document.getElementById('shop-grid');
+                const filtered = category === 'All' 
+                    ? db.products 
+                    : db.products.filter(p => p.category === category);
+                
+                grid.innerHTML = filtered.map(p => Components.ProductCard(p)).join('');
+            }
+        };
+
+        const admin = {
+            showAddModal: () => {
+                document.getElementById('add-product-modal').classList.remove('hidden');
+            },
+            hideAddModal: () => {
+                document.getElementById('add-product-modal').classList.add('hidden');
+            },
+            addProduct: (e) => {
+                e.preventDefault();
+                const newProduct = {
+                    id: Date.now(),
+                    name: document.getElementById('new-prod-name').value,
+                    category: document.getElementById('new-prod-cat').value,
+                    price: parseInt(document.getElementById('new-prod-price').value),
+                    image: document.getElementById('new-prod-img').value,
+                    description: document.getElementById('new-prod-desc').value
+                };
+                
+                db.products.push(newProduct);
+                admin.hideAddModal();
+                router.navigate('admin'); // Re-render
+                showToast("Product added successfully");
+            },
+            deleteProduct: (id) => {
+                if(confirm('Are you sure?')) {
+                    db.products = db.products.filter(p => p.id !== id);
+                    router.navigate('admin'); // Re-render
+                    showToast("Product deleted");
+                }
+            }
+        };
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            router.navigate('home');
+        });
+
+    </script>
+</body>
+</html>
